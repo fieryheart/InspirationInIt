@@ -85,7 +85,7 @@ class ShotsApp extends Component {
                 <ScrollView>
                     <Header />
                     <View style={styles.shotsBoxSize}>
-                         { this.showShotList(state.shots) }      
+                         { this.showShotList(state) }      
                     </View>
                 </ScrollView>
                 <View style={styles.posterContainer}>

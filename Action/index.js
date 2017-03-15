@@ -14,39 +14,39 @@ const actions = {
 
 	fetchShots: () => (dispatch) => {
 
-				// let url = BASIC_URL + '/shots';
+				let url = BASIC_URL + '/shots';
 				
-				// let request = new Request(url, header);
+				let request = new Request(url, header);
 
-				// fetch( request ).then( response => response.json() )
-				// 	.then( (json) => {
-				// 		dispatch( actions.getShots(json) );		
-				// 	})
-				// 	.catch((error) => {
-				// 		console.error(error);
-				// 	})
+				fetch( request ).then( response => response.json() )
+					.then( (json) => {
+						dispatch( actions.getShots(json) );		
+					})
+					.catch((error) => {
+						console.error(error);
+					})
 				
-				let request = new Request('http://10.0.2.2:8888' , {
-				  method: 'GET',
-				  mode: 'cors',
-				  headers: {
-				    'Accept' : 'text/xml',
-				    'Content-Type': 'text/plain;charset=UTF-8',
-				  }
-				});
+				// let request = new Request('http://10.0.2.2:8888' , {
+				//   method: 'GET',
+				//   mode: 'cors',
+				//   headers: {
+				//     'Accept' : 'text/xml',
+				//     'Content-Type': 'text/plain;charset=UTF-8',
+				//   }
+				// });
 
 
-				 fetch(request).then(response => response._bodyInit)
-						.then(data => {
-							let json = JSON.parse(data);
-							dispatch( actions.getShots(json.shots) )
-						})
-				                      	.catch((error) => {
-				                              		console.error(error);
-				                     	});
-				return {
-					type:''
-				};
+				//  fetch(request).then(response => response._bodyInit)
+				// 		.then(data => {
+				// 			let json = JSON.parse(data);
+				// 			dispatch( actions.getShots(json.shots) )
+				// 		})
+				//                       	.catch((error) => {
+				//                               		console.error(error);
+				//                      	});
+				// return {
+				// 	type:''
+				// };
 	},
 
 	getShots: (json) => ({
