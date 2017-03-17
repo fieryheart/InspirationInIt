@@ -3,7 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView
+  ScrollView,
+  Dimensions,
+  TouchableHighlight 
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,6 +16,8 @@ import Description from './Description';
 import Comments from './Comments';
 import Header from './Header';
 
+
+const {width, height} = Dimensions.get('window');
 // 添加redux来改变state重新更新
 class ShotsApp extends Component {
 
@@ -25,7 +29,7 @@ class ShotsApp extends Component {
     showShotList(shots) {
         let data = [];
         let {actions}  = this.props;
-        if(shots) {
+        if(shots) {              
                 shots.forEach( (shot) => {
                         if(shot){
                             data.push(<Shot shotInfo={shot} key={shot.id} />)
@@ -77,7 +81,7 @@ class ShotsApp extends Component {
 
     render() {
         
-        let {state} = this.props;
+        let {state, actions} = this.props;
 
         return (
             <View style={styles.container}>
@@ -85,8 +89,12 @@ class ShotsApp extends Component {
                 <ScrollView>
                     <Header />
                     <View style={styles.shotsBoxSize}>
-                         { this.showShotList(state) }      
+                         { this.showShotList(state.shots) }
+                         <Text>hello</Text>     
                     </View>
+                    <TouchableHighlight onPress={actions.fetchShots} underlayColor="#000000">
+                        <Text style={styles.getMore}>Get More...</Text>
+                    </TouchableHighlight>
                 </ScrollView>
                 <View style={styles.posterContainer}>
                     { this.showImg(state) }
@@ -105,7 +113,10 @@ class ShotsApp extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        backgroundColor: '#000000'
+        width: width,
+        height: height,
+        backgroundColor: '#000000',
+        paddingBottom: 50
     },
 
     shotsBoxSize: {
@@ -134,6 +145,19 @@ const styles = StyleSheet.create({
         bottom:0,
         left: 0,
         right: 0
+    },
+    getMore: {
+        flex: 1,
+        color: "#000000",
+        fontSize: 14,
+        textAlign: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#aaaaaa',
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 5,
+        paddingTop: 8,
+        paddingBottom: 8
     }
 });
 
